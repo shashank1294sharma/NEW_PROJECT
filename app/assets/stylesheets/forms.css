@@ -638,13 +638,7 @@ span.input-icon {
 
 input[type=checkbox],
 input[type=radio] {
-    opacity: 0;
-    position: absolute;
-    left: -9999px;
-    z-index: 12;
-    width: 18px;
-    height: 18px;
-    cursor: pointer
+    
 }
 
 input[type=checkbox].inverted:checked~.text:before,
@@ -1480,4 +1474,16 @@ input[type=checkbox].checkbox-slider.colored-maroon.toggle:checked~.text:after {
 
 input[type=checkbox].checkbox-slider.colored-maroon.toggle~.text:after {
     background-color: #981b48
+}
+.feed-post-form-input input[type=radio]{
+ 
+  color: blue !important;
+}
+
+.feed-post-form-input input[type=checkbox]
+{
+    color: red !important;
+}
+.feed-post-form-input{
+    color:red;
 }
