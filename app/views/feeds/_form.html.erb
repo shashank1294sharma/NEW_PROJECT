@@ -67,7 +67,7 @@
         </div>
       </div>
       <!-- end left links -->
-
+      
 
       <!-- center posts -->
       <div class="col-md-6">
@@ -77,7 +77,7 @@
             <div class="row">
               <div class="col-md-12">
                 <!-- post state form -->
-                <%=form_for(@feed, :html=> {class: "form-horizontal", role: "form"}) do |f|%>
+                <%= form_for(@feed, :html=> {class: "form-horizontal", role: "form"}) do |f|%>
                   <div class="box profile-info n-border-top">
                     <form>
                       <%=f.text_field :post, class: "form-control input-lg p-text-area", placeholder: "Whats in your mind today?", autofocus: true%>
@@ -113,6 +113,7 @@
                     <div class="box-body" style="display: block;">
                       
                       <p><%= f.post%></p>
+                      
                       <p>ID:<%= f.id%></p>
                       <!-- <ul class="feed-post-form-input"> -->
                       <p><%=link_to "[Edit Post]" , edit_feed_path(f)%>,<%=link_to "[Delete post]" , feed_path(f), method: :delete , data: {confirm: "Are you sure"}%></p>
