@@ -4,17 +4,19 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
 
 	def index
 		@feeds = current_user.feeds
+		# @posts = Feed.ids(params[:id]).order("created_at DESC")
 	end
 
 	def new
-		@feeds = Feed.new
+		@feed = Feed.new
+		@feedss = current_user.feeds.newest_first
 	end
 
 	def create
 		@feed = current_user.feeds.build(feed_params)
 		if @feed.save
 			flash[:success] = "Feed was succesfully created"
-			redirect_to feed_path(@feed)
+			redirect_to new_feed_path(@feed)
 		else
 			render 'new'
 		end
@@ -38,13 +40,14 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
 
 		@feed = Feed.find(params[:id])
         if @feed.present?
-          @feed.destroy
+          @feed.destroy 
         end
         redirect_to feeds_path
 	end
 
 	def show
 		@feed = current_user.feeds.find(params[:id])
+		
 	end
 
 	private
