@@ -1,0 +1,23 @@
+   
+<!-- friends -->
+<div role="tabpanel " class="tab-pane active" id="messages">
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class="col-md-3">
+        <div class="contact-box center-version">
+          <a href="#">
+            <!-- <img alt="image" class="img-circle" src="./img/guy-5.jpg"> -->
+            <h3 class="m-b-xs"><strong><%= user.first_name %> <%= user.last_name%></strong></h3>
+
+            <div class="font-bold">Graphics designer</div>
+          </a>
+          <div class="contact-box-footer">
+            <div class="m-t-xs btn-group">
+              <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post%>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div><!-- end friends -->

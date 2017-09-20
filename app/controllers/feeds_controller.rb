@@ -14,7 +14,6 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
 		else
 			Feed.public_feeds.newest_first
 		end
-
 	end
 
 	def create
@@ -55,15 +54,19 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
 		redirect_to new_feed_path
 	end
 
-def edit
-	@feed = current_user.feeds.find(params[:id])
-	@feedss =  if  current_user.present?
-			Feed.public_and_my_feeds(current_user.id).newest_first
-		else
-			Feed.public_feeds.newest_first
-		end
+	def edit
+		@feed = current_user.feeds.find(params[:id])
+		@feedss =  if  current_user.present?
+				Feed.public_and_my_feeds(current_user.id).newest_first
+			else
+				Feed.public_feeds.newest_first
+			end
+		
+	end
 	
-end
+
+
+
 	private
 
 	def set_feed

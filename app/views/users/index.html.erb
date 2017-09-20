@@ -1,0 +1,20 @@
+<h1>Here</h1>
+
+<ul>
+  <li><%= link_to "Feed Tab" ,new_feed_path %></li>
+  <li><%= link_to "Bookmark Tab" %></li>
+  
+</ul>
+
+<% @users.each do |user| %>
+  <div class="user">
+    <p>
+      <strong><%= user.first_name %> <%= user.last_name%></strong>
+      <strong><% user.dob%></strong>
+
+      <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post%>
+      <div class="clear"></div>
+      <%= link_to "Profile Tab" , user_path(user) %>
+    </p>
+  </div>
+<% end %>

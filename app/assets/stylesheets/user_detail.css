@@ -96,7 +96,7 @@
 .nav.nav-tabs-custom-colored > li.active > a:hover, 
 .nav.nav-tabs-custom-colored > li.active > a:focus {
   background-color: #39bbdb;
-  color: #fff;
+  color: black;
   cursor: pointer;
 }
 
