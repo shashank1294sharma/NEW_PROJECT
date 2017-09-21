@@ -2,78 +2,80 @@ class FeedsController < ApplicationController
 before_action :set_feed , only: [:edit,:update,:show,:destroy]
 
 
-	def index
-		@feeds = current_user.feeds
-		# @posts = Feed.ids(params[:id]).order("created_at DESC")
-	end
+  def index
+    @feeds = current_user.feeds
+    # @posts = Feed.ids(params[:id]).order("created_at DESC")
+  end
 
-	def new
-		@feed = Feed.new
-		@feedss =  if  current_user.present?
-			Feed.public_and_my_feeds(current_user.id).newest_first
-		else
-			Feed.public_feeds.newest_first
-		end
-	end
+  def new
 
-	def create
-		@feed = current_user.feeds.build(feed_params)
-		if @feed.save
-			flash[:success] = "Feed was succesfully created"
-			redirect_to new_feed_path
-		else
-			render 'new'
-		end
-	end
+    @users = User.all
+    @feed = Feed.new
+    @feedss =  if  current_user.present?
+      Feed.public_and_my_feeds(current_user.id).newest_first
+    else
+      Feed.public_feeds.newest_first
+    end
+  end
 
-	def update
+  def create
+    @feed = current_user.feeds.build(feed_params)
+    if @feed.save
+      flash[:success] = "Feed was succesfully created"
+      redirect_to new_feed_path
+    else
+      render 'new'
+    end
+  end
 
-		if @feeds.update(feed_params)
-			
-			flash[:success] = "Feed Succesfully Updated"
-			redirect_to feed_path(@feeds)
-		else
-			render 'edit'
-		end
-	end
+  def update
 
-	def destroy
-		# @feed.destroy
-		# flash[:danger] = "Feed Deleted Succesfully"
-		# redirect_to feed_path
+    if @feed.update(feed_params)
+      
+      flash[:success] = "Feed Succesfully Updated"
+      redirect_to feed_path(@feed)
+    else
+      render 'edit'
+    end
+  end
 
-		@feed = Feed.find(params[:id])
+  def destroy
+    # @feed.destroy
+    # flash[:danger] = "Feed Deleted Succesfully"
+    # redirect_to feed_path
+
+
         if @feed.present?
           @feed.destroy 
         end
         redirect_to new_feed_path
-	end
+  end
 
-	def show
-		@feed = current_user.feeds.find(params[:id])
-		redirect_to new_feed_path
-	end
+  def show
+    
+    redirect_to new_feed_path
+  end
 
-	def edit
-		@feed = current_user.feeds.find(params[:id])
-		@feedss =  if  current_user.present?
-				Feed.public_and_my_feeds(current_user.id).newest_first
-			else
-				Feed.public_feeds.newest_first
-			end
-		
-	end
-	
+  def edit
+    @users = User.all
+    @feedss =  if  current_user.present?
+        Feed.public_and_my_feeds(current_user.id).newest_first
+      else
+        Feed.public_feeds.newest_first
+      end
+    
+  end
+  
 
 
 
-	private
+  private
 
-	def set_feed
-	 	@feeds = Feed.find(params[:id])
-   end
+  def set_feed
+    @feed = current_user.feeds.find(params[:id])
+    end
 
-	def feed_params
-		params.require(:feed).permit(:post,:status)
-	end
+  def feed_params
+    params.require(:feed).permit(:post,:status)
+  end
 end

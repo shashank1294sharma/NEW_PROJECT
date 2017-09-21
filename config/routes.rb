@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root to: "users#index"
+
+root 'feeds#new'
+ 
 
   resources :feeds
 
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :users do
     get :find_friends , on: :collection
+    get :about_me , on: :collection
   end
 
 
