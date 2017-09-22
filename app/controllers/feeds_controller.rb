@@ -8,18 +8,22 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
   end
 
   def new
-
     @users = User.all
     @feed = Feed.new
-    @feedss =  if  current_user.present?
+    @feeds =  if  current_user.present?
       Feed.public_and_my_feeds(current_user.id).newest_first
     else
-      Feed.public_feeds.newest_first
+      Feed.for_all.newest_first
     end
   end
 
   def create
     @feed = current_user.feeds.build(feed_params)
+     @feeds =  if  current_user.present?
+      Feed.public_and_my_feeds(current_user.id).newest_first
+    else
+      Feed.for_all.newest_first
+    end
     if @feed.save
       flash[:success] = "Feed was succesfully created"
       redirect_to new_feed_path
@@ -58,7 +62,7 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
 
   def edit
     @users = User.all
-    @feedss =  if  current_user.present?
+    @feeds =  if  current_user.present?
         Feed.public_and_my_feeds(current_user.id).newest_first
       else
         Feed.public_feeds.newest_first
