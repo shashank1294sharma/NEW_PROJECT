@@ -8,8 +8,10 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
   end
 
   def new
+
     @users = User.all
     @feed = Feed.new
+
     @feeds =  if  current_user.present?
       Feed.public_and_my_feeds(current_user.id).newest_first
     else
@@ -53,7 +55,7 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
           @feed.destroy 
         end
         redirect_to new_feed_path
-  end
+    end
 
   def show
     
@@ -80,6 +82,6 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
     end
 
   def feed_params
-    params.require(:feed).permit(:post,:status)
+    params.require(:feed).permit(:post,:status,:image)
   end
 end

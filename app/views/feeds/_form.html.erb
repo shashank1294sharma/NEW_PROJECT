@@ -1,134 +1,118 @@
 <%=render 'layouts/innerpage'%>
 
-  <div class="container page-content ">
-    <div class="row">
-      <!-- left links -->
-      <div class="col-md-3">
-        <div class="profile-nav">
-          <div class="widget">
-            <div class="widget-body">
-              <div class="user-heading round">
-                <a href="#">
-                  <img src=<%= asset_path 'guy-5.jpg' %> alt="">
-                </a>
-                <p>
-                  <%=current_user.email %>
-                </p>
-
-              </div>
-
-              <ul class="nav nav-pills nav-stacked">
-                <li class="active">
-                   </i> <%= link_to "MY Profile Tab" , user_path(current_user) %>
-                </li>       
-              </ul>
+<div class="container page-content ">
+  <div class="row">
+    <!-- left links -->
+    <div class="col-md-3">
+      <div class="profile-nav">
+        <div class="widget">
+          <div class="widget-body">
+            <div class="user-heading round">
+              <a href="#">
+                <img src=<%= asset_path 'guy-5.jpg' %> alt="">
+              </a>
+              <p>
+                <%=current_user.email %>
+              </p>
             </div>
+            <ul class="nav nav-pills nav-stacked">
+              <li class="active">
+                 </i> <%= link_to "MY Profile Tab" , user_path(current_user) %>
+              </li>       
+            </ul>
           </div>
         </div>
       </div>
-      <!-- end left links -->
-      
-
-      <!-- center posts -->
-      <div class="col-md-6">
-        <div class="row">
-          <!-- left posts-->
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-12">
-                <!-- post state form -->
-                <%= form_for(@feed, :html=> {class: "form-horizontal", role: "form"}) do |f|%>
-                  <div class="box profile-info n-border-top">
-                    <form>
-                      <%=f.text_field :post, class: "form-control input-lg p-text-area", placeholder: "Whats in your mind today?", autofocus: true%>
-                        <!-- <textarea class="form-control input-lg p-text-area" rows="2" placeholder="Whats in your mind today?"></textarea> -->
-                    </form>
-                    <div class="box-footer box-form">
-
-                      <%=f.submit class: "btn btn-azure pull-right"%>
-
-                        <ul class="feed-post-form-input">
-                         
-                          <li>
-                            <%=f.radio_button :status, 'only_me'%>
-                            <%=f.label :status, 'Only me' %>
-
-                            <%=f.radio_button :status, 'for_all' %>
-                            <%=f.label :status, 'public' %>
-
-                            <%=f.radio_button :status, 'friends' %>
-                            <%=f.label :status, 'friends' %>
-                          </li>
-                         
-
-                        </ul>
-                    </div>
-                  <%end%>
-                  </div>
-                    <% @feeds.each do |f| %>
-                    <% user = f.user %>
-                    <div class="box box-widget">
-                    <div class="box-header with-border">
-                    <div class="box-tools">
-                          <% if current_user == user %>
-                          <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                            <%=link_to edit_feed_path(f) do %>
-                              <i class="fa fa-edit"></i>
-                           <button type="button" class="btn btn-box-tool" data-widget="remove">
-                           <%=link_to feed_path(f), method: :delete , data: {confirm: "Are you sure"} do %>
-                           <i class="fa fa-trash"></i></button>
-                            <% end %>
-                            <% end %>
-
-                          </button>
-                          
-                           <% end %>
-
-                     
-                    </div>
-                       <div class="user-block">
-                        <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
-                        <span class="username"><%= user.first_name %></span>
-                        
-                        
-                  </div>
-                  
-                      <div class="box-body" style="display: block;">
-                      
-                        <p><%= f.post%></p>
-                      
-                        <!-- <ul class="feed-post-form-input"> -->
-
-
-
-
-                        <%# if current_user == user %>
-                         <!--  <p><%#=link_to "[Edit Post]" , edit_feed_path(f)%>,<%#=link_to "[Delete post]" , feed_path(f), method: :delete , data: {confirm: "Are you sure"}%></p> -->
-                        <%# end %>
-                     
-                      
-                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                        <span class="pull-right text-muted">127 likes - 3 comments</span>
-                      </div>
-                    </div>
-                    </div>
-                  <% end %>
-                  <!-- end post state form -->
-
-
-              </div>
-            </div>
-          </div>
-          <!-- end left posts-->
-        </div>
-      </div>
-      <!-- end  center posts -->
-
-
-
-
-      <!-- right posts -->
-      <!-- end right posts -->
     </div>
+    <!-- end left links -->
+    
+
+    <!-- center posts -->
+    <div class="col-md-6">
+      <div class="row">
+        <!-- left posts-->
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- post state form -->
+              <%= form_for(@feed, :html=> {class: "form-horizontal", role: "form"}) do |f|%>
+                <div class="box profile-info n-border-top">
+                  <form>
+
+                    <%=f.text_field :post, class: "form-control input-lg p-text-area", placeholder: "Whats in your mind today?", autofocus: true%>
+
+                      
+                    
+                  </form>                      
+                  <div class="box-footer box-form">
+                    <%=f.submit class: "btn btn-azure pull-right"%>
+                      <p >
+                        <%= f.file_field :image %>
+                      </p>
+                      <ul class="feed-post-form-input">
+                        <li>
+                          <%=f.radio_button :status, 'only_me'%>
+                          <%=f.label :status, 'Only me' %>
+                          <%=f.radio_button :status, 'for_all' %>
+                          <%=f.label :status, 'public' %>
+                          <%=f.radio_button :status, 'friends' %>
+                          <%=f.label :status, 'friends' %>
+                        </li>
+                      </ul>
+                  </div>
+                <%end%>
+                </div>
+                  <% @feeds.each do |f| %>
+                  <% user = f.user %>
+                  <div class="box box-widget">
+                  <div class="box-header with-border">
+                  <div class="box-tools">
+                    <% if current_user == user %>
+                      <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                      <%=link_to edit_feed_path(f) do %>
+                        <i class="fa fa-edit"></i>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                          <%=link_to feed_path(f), method: :delete , data: {confirm: "Are you sure"} do %>
+                            <i class="fa fa-trash"></i></button>
+                          <% end %>
+                      <% end %>
+                       </button>
+                    <% end %>
+                  </div>
+                   <div class="user-block">
+                      <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
+                      <span class="username"><%= user.first_name %></span>     
+                   </div>
+                
+                    <div class="box-body" style="display: block;">
+                      <p>
+                        <%= f.post %>
+                        
+                      </p>
+                         <%= image_tag(f.image)%>
+                     
+                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                      <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                      <span class="pull-right text-muted">127 likes - 3 comments</span>
+                    </div>
+                  </div>
+                  </div>
+                <% end %>
+                <!-- end post state form -->
+
+
+            </div>
+          </div>
+        </div>
+        <!-- end left posts-->
+      </div>
+    </div>
+    <!-- end  center posts -->
+
+
+
+
+    <!-- right posts -->
+    <!-- end right posts -->
   </div>
+</div>
