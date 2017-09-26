@@ -6,16 +6,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def add_friend
-    
-  end
 
-  def remove_friend
-    
-  end
 
   def show
-   
     @friendship = Friendship.new
     @user = User.find(params[:id])
   end
@@ -24,11 +17,19 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def about_me
-    @user = User.find(params[:id])
+  def add_friend
+    
+  end
+  
+  def remove_friend
+    
   end
 
-  def moveToTimeline
-  end
+  # def about_me
+  #   @user = User.find(params[:id])
+  # end
+
+  # def moveToTimeline
+  # end
 
 end

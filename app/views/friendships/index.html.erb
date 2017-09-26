@@ -1,0 +1,6 @@
+<h2>Your Friends</h2>
+<ul>
+  <% for user in @friendship.friends %>
+  <li><%= h user.first_name %></li>
+  <% end %>  
+</ul>

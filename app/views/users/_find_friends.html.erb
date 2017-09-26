@@ -2,7 +2,12 @@
 <!-- friends -->
 <div role="tabpanel " class="tab-pane active" id="messages">
   <div class="row">
+  
     <% @users.each do |user| %>
+      
+        
+      
+    <%# for friendship in @users.friendships%>
       <div class="col-md-3">
         <div class="contact-box center-version">
           <a href="#">
@@ -10,10 +15,13 @@
             <h3 class="m-b-xs"><strong><%= user.first_name %> <%= user.last_name%></strong></h3>
 
             <div class="font-bold">Graphics designer</div>
+            
           </a>
           <div class="contact-box-footer">
             <div class="m-t-xs btn-group">
-              <%= link_to "Add Friend", {:controller => 'friendships', :action => 'create',first_name: "bhvjv" }, :method => :post%>   
+              <%#= link_to "Add Friend", {:controller => 'friendships', :action => 'create',first_name: "bhvjv" }, :method => :post%>
+              <%= link_to "Add Friends", friendships_path(friend_id: user.id), method: :post %>
+              
             </div>
           </div>
         </div>

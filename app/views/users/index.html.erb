@@ -1,20 +1,31 @@
-<h1>Here</h1>
-
-<ul>
-  <li><%= link_to "Feed Tab" ,new_feed_path %></li>
-  <li><%= link_to "Bookmark Tab" %></li>
+   
+<!-- friends -->
+<div role="tabpanel " class="tab-pane active" id="messages">
+  <div class="row">
   
-</ul>
+    <% @users.friendships.each do |user| %>
+      <% user.friendships.each do|f|%>
+        
+      
+    <%# for friendship in @users.friendships%>
+      <div class="col-md-3">
+        <div class="contact-box center-version">
+          <a href="#">
+            <!-- <img alt="image" class="img-circle" src="./img/guy-5.jpg"> -->
+            <h3 class="m-b-xs"><strong><%= f.friend.first_name %> <%= f.friend.last_name%></strong></h3>
 
-<% @users.each do |user| %>
-  <div class="user">
-    <p>
-      <strong><%= user.first_name %> <%= user.last_name%></strong>
-      <strong><% user.dob%></strong>
-
-      <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post%>
-      <div class="clear"></div>
-      <%= link_to "Profile Tab" , user_path(user) %>
-    </p>
+            <div class="font-bold">Graphics designer</div>
+            <%end%>
+          </a>
+          <div class="contact-box-footer">
+            <div class="m-t-xs btn-group">
+              <%#= link_to "Add Friend", {:controller => 'friendships', :action => 'create',first_name: "bhvjv" }, :method => :post%>
+              <%= link_to "Add Friends", friendships_path(friend_id: user.id), method: :post %>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div><!-- end friends -->
