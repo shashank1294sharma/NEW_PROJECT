@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   # validates :friend, presence: true
+  #validate :check_user
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -12,7 +13,20 @@ class User < ActiveRecord::Base
 
   #friends
   has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :friends, through: :friendships , source: :friend
+
+#for reverse (inverse friendship)
+  has_many :inverse_friendships , :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends , :through => :inverse_friendships , source: :user
+
+
+
+ # validate :check_user
+ #  def check_user
+ #    if self.friend_id == self.user_id
+ #      errors.add(:friend, "can't be yourself")
+ #    end
+ # end
 
 
   #in-terms of friendships
