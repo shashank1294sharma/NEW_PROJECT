@@ -1,6 +1,5 @@
-<h2>Your Friends</h2>
-<ul>
-  <% for user in @friendship.friends %>
-  <li><%= h user.first_name %></li>
-  <% end %>  
-</ul>
+<h2>friends</h2>
+	<%@sent_requests.each do |friend|%>
+
+	<%= friend.first_name%>
+<%end%>
