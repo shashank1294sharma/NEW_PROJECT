@@ -62,17 +62,17 @@
                   </div>
                 <%end%>
                 </div>
-                  <% @feeds.each do |f| %>
-                  <% user = f.user %>
+                  <% @feeds.each do |feed| %>
+                  <% user = feed.user %>
                   <div class="box box-widget">
                   <div class="box-header with-border">
                   <div class="box-tools">
                     <% if current_user == user %>
                       <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                      <%=link_to edit_feed_path(f) do %>
+                      <%=link_to edit_feed_path(feed) do %>
                         <i class="fa fa-edit"></i>
                         <button type="button" class="btn btn-box-tool" data-widget="remove">
-                          <%=link_to feed_path(f), method: :delete , data: {confirm: "Are you sure"} do %>
+                          <%=link_to feed_path(feed), method: :delete , data: {confirm: "Are you sure"} do %>
                             <i class="fa fa-trash"></i></button>
                           <% end %>
                       <% end %>
@@ -86,14 +86,17 @@
                 
                     <div class="box-body" style="display: block;">
                       <p>
-                        <%= f.post %>
+                        <%= feed.post %>
                         
                       </p>
-                         <%= image_tag(f.image)%>
+                         <%= image_tag(feed.image)%>
                      
                       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
                       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
                       <span class="pull-right text-muted">127 likes - 3 comments</span>
+                      <%# @bookmark = Bookmark.new %> 
+                      <%#= link_to "Bookmarks", @bookmark({feed_id: feed.id}), method: 'post' %>
+                      <%= link_to "Bookmark", {:controller => "bookmarks", :action => "create", :feed_id => feed.id }, :method => :post%>
                     </div>
                   </div>
                   </div>

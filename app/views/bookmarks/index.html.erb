@@ -1,0 +1,3 @@
+<% @bookmarks.each do |bookmark| %>
+  <p><%= bookmark.feed.try(:post) %></p>
+<% end %>

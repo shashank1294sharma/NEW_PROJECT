@@ -13,7 +13,7 @@ root 'feeds#new'
   resources :feeds
 
   resources :friendships
-
+  resources :bookmarks
   
 
   resources :users do
