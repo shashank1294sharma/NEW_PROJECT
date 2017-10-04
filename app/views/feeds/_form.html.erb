@@ -96,7 +96,13 @@
                       <span class="pull-right text-muted">127 likes - 3 comments</span>
                       <%# @bookmark = Bookmark.new %> 
                       <%#= link_to "Bookmarks", @bookmark({feed_id: feed.id}), method: 'post' %>
-                      <%= link_to "Bookmark", {:controller => "bookmarks", :action => "create", :feed_id => feed.id }, :method => :post%>
+                      <%if current_user.bookmarks.pluck(:feed_id).include?(feed.id)%>
+                     
+                        <%= link_to "bookmarke saved"%>
+                      <%else%>
+                       <%= link_to "Bookmark", {:controller => "bookmarks", :action => "create", :feed_id => feed.id }, :method => :post%>
+                     
+                      <%end%>
                     </div>
                   </div>
                   </div>

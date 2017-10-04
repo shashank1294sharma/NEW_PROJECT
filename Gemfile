@@ -33,6 +33,10 @@ gem "font-awesome-rails"
 gem "rmagick"
 gem "carrierwave"
 
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-twitter'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -55,4 +59,3 @@ group :development do
   gem 'spring'
 end
 gem 'pnotify-rails'
-

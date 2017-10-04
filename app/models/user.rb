@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   #validate :check_user
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [ :twitter]
+
 
   has_many :feeds
   has_many :bookmarks
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships , :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends , :through => :inverse_friendships , source: :user
 
-
+ 
 
  # validate :check_user
  #  def check_user
@@ -40,5 +41,7 @@ class User < ActiveRecord::Base
   # def remove_friend(friend)
   # 	current_user.friends.destroy(friend)
   # end
+
+
   
 end

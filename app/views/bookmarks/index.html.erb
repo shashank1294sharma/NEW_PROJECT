@@ -1,3 +1,57 @@
-<% @bookmarks.each do |bookmark| %>
-  <p><%= bookmark.feed.try(:post) %></p>
-<% end %>
+<%=render 'layouts/bookmarks'%>
+
+<div class="container page-content ">
+
+<div class="row">
+<!-- left links -->
+<div class="col-md-3">
+  <div class="profile-nav">
+    <div class="widget">
+      <div class="widget-body">
+        <div class="user-heading round">
+          <a href="#">
+            <img src=<%= asset_path 'guy-5.jpg' %> alt="">
+          </a>
+          <p>
+            <%=current_user.email %>
+          </p>
+        </div>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active">
+             </i> <%= link_to "MY Profile Tab" , user_path(current_user) %>
+          </li>       
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="col-md-6">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-widget">
+            <div class="box-header with-border">
+               <div class="box-tools">
+                </div>
+               <div class="user-block">
+                  <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
+               </div><br>
+                <div class="box-body" style="display: block;">
+                  <% @bookmarks.each do |bookmark| %>
+                    <p><h4>--></h4><%= bookmark.feed.try(:post) %></p>
+                    <%= image_tag(bookmark.feed.image)%>
+                  <% end %>
+                </div>
+               </div>                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
