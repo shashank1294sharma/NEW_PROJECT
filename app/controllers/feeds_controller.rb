@@ -49,13 +49,11 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
     # @feed.destroy
     # flash[:danger] = "Feed Deleted Succesfully"
     # redirect_to feed_path
-
-
-        if @feed.present?
-          @feed.destroy 
-        end
-        redirect_to new_feed_path
+    if @feed.present?
+      @feed.destroy 
     end
+    redirect_to new_feed_path
+  end
 
   def show
     
@@ -71,9 +69,6 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
       end
     
   end
-  
-
-
 
   private
 

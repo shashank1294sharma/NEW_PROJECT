@@ -1,6 +1,7 @@
 <h2>friends</h2>
 
-<% @friends.each do |user| %>
+<% @friend_requests.each do |friendship| %>
+  <% user = friendship #.friend %>
   <div class="col-md-3">
     <div class="contact-box center-version">
       <a href="#">

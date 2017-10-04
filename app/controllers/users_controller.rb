@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
 
- 
-
   def index
     @users = User.all
   end
-
-
 
   def show
     @friendship = Friendship.new
@@ -14,7 +10,9 @@ class UsersController < ApplicationController
   end
 
   def find_friends
-    @users = User.all
+    # binding.pry
+    @users = User.all.reject{|u| u.id == current_user.id}
+    # @friendships = current_user.friendships
   end
 
   def add_friend

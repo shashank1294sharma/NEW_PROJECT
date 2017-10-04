@@ -21,6 +21,8 @@ root 'feeds#new'
     get :about_me , on: :collection
   end
 
+  get 'accept_request/:friend_id' => 'friendships#accept_request'
+  get 'friend_requests' => 'friendships#friend_requests'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
