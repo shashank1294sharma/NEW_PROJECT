@@ -1,0 +1,18 @@
+<%= render 'layouts/innerpage'%>
+
+<div class="friend_request_section" style="margin-top: 100px">
+  <h2>Incoming</h2>
+  <%@incoming.each do |friend_request|%>
+    <%= friend_request.sender_name%>
+    <%= link_to "Accept", friend_request, method: :patch %>
+    <%= link_to "Reject", friend_request, method: :delete %>
+    <br>
+  <%end%>
+
+  <h2>Outgoing</h2>
+  <%@outgoing.each do |friend_request|%>
+    <%= friend_request.receiver_name%>
+    <%= link_to "Cancel", friend_request, method: :delete %>
+    <br>
+  <%end%>
+</div>

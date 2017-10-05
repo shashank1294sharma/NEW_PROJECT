@@ -11,16 +11,6 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        
-        <strong>
-           <%# if user_signed_in? %>
-           <!--  Logged in as <strong><%= current_user.email %></strong>. -->
-            <%#= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %><!--  | -->
-            <%#= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-              <%# else %>
-               
-            <%# end %>
-        </strong>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <% if user_signed_in? %>
@@ -30,9 +20,10 @@
             <li><a><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></a></li>
             <li><a><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></a></li>
             <li><%= link_to "Bookmarks", bookmarks_path, :class => 'navbar-link'  %></li>
+            <li><%= link_to "Friend Requests", friend_requests_path, :class => 'navbar-link'  %></li>
+            <li><%= link_to "Friends", friends_index_path, :class => 'navbar-link'  %></li>
             <% else %>
             <% end %>
-            
           </ul>
         </li>
       </ul>

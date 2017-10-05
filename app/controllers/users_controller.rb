@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
 
- 
-
   def index
     @users = User.all
   end
-
-
 
   def show
     @friendship = Friendship.new
@@ -14,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def find_friends
-    @users = User.all
+    @users = User.all.reject{|u| u.id == current_user.id}
   end
 
   def add_friend
@@ -24,12 +20,4 @@ class UsersController < ApplicationController
   def remove_friend
     
   end
-
-  # def about_me
-  #   @user = User.find(params[:id])
-  # end
-
-  # def moveToTimeline
-  # end
-
 end

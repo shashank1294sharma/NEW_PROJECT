@@ -1,6 +1,5 @@
 class FeedsController < ApplicationController
-before_action :set_feed , only: [:edit,:update,:show,:destroy]
-
+  before_action :set_feed , only: [:edit,:update,:show,:destroy]
 
   def index
     @feeds = current_user.feeds
@@ -8,7 +7,6 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
   end
 
   def new
-
     @users = User.all
     @feed = Feed.new
 
@@ -35,9 +33,7 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
   end
 
   def update
-
     if @feed.update(feed_params)
-      
       flash[:success] = "Feed Succesfully Updated"
       redirect_to feed_path(@feed)
     else
@@ -46,40 +42,30 @@ before_action :set_feed , only: [:edit,:update,:show,:destroy]
   end
 
   def destroy
-    # @feed.destroy
-    # flash[:danger] = "Feed Deleted Succesfully"
-    # redirect_to feed_path
-
-
-        if @feed.present?
-          @feed.destroy 
-        end
-        redirect_to new_feed_path
+    if @feed.present?
+      @feed.destroy 
+    end
+    redirect_to new_feed_path
     end
 
   def show
-    
     redirect_to new_feed_path
   end
 
   def edit
     @users = User.all
     @feeds =  if  current_user.present?
-        Feed.public_and_my_feeds(current_user.id).newest_first
-      else
-        Feed.public_feeds.newest_first
-      end
-    
+      Feed.public_and_my_feeds(current_user.id).newest_first
+    else
+      Feed.public_feeds.newest_first
+    end
   end
-  
-
-
 
   private
 
   def set_feed
     @feed = current_user.feeds.find(params[:id])
-    end
+  end
 
   def feed_params
     params.require(:feed).permit(:post,:status,:image)

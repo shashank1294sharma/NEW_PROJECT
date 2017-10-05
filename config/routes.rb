@@ -1,26 +1,26 @@
 Rails.application.routes.draw do
  
-  get 'friends/index'
-
- get 'friends/destroy'
   devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-root 'feeds#new'
- 
-
-  resources :feeds
-
-  resources :friendships
-  resources :bookmarks
-  
+  root 'feeds#new'
 
   resources :users do
     get :find_friends , on: :collection
     get :about_me , on: :collection
   end
 
+  resources :feeds
+  resources :friendships
+  resources :bookmarks
+  resources :friend_requests
+
+  get 'friends/index'
+  get 'friends/destroy'
+  get 'friends/index'
+
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

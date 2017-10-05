@@ -1,26 +1,33 @@
 class User < ActiveRecord::Base
-  #Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-
-  # validates :friend, presence: true
-  #validate :check_user
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [ :twitter]
 
+  has_many :friend_requests, dependent: :destroy
+  has_many :pending_friends, through: :friend_requests, source: :friend
+
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 
   has_many :feeds
   has_many :bookmarks
 
+  def remove_friend(friend)
+    current_user.friends.destroy(friend)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   #friends
-  has_many :friendships
-  has_many :friends, through: :friendships , source: :friend
+  # has_many :friendships
+  # has_many :friends, through: :friendships , source: :friend
 
 #for reverse (inverse friendship)
-  has_many :inverse_friendships , :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends , :through => :inverse_friendships , source: :user
+  # has_many :inverse_friendships , :class_name => "Friendship", :foreign_key => "friend_id"
+  # has_many :inverse_friends , :through => :inverse_friendships , source: :user
 
- 
 
  # validate :check_user
  #  def check_user
@@ -28,7 +35,6 @@ class User < ActiveRecord::Base
  #      errors.add(:friend, "can't be yourself")
  #    end
  # end
-
 
   #in-terms of friendships
   # has_many :friendships , dependent: :destroy
@@ -42,6 +48,4 @@ class User < ActiveRecord::Base
   # 	current_user.friends.destroy(friend)
   # end
 
-
-  
 end
