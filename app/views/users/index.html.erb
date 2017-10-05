@@ -19,7 +19,6 @@
           </a>
           <div class="contact-box-footer">
             <div class="m-t-xs btn-group">
-              <%#= link_to "Add Friend", {:controller => 'friendships', :action => 'create',first_name: "bhvjv" }, :method => :post%>
               <%= link_to "Add Friends", friendships_path(friend_id: user.id), method: :post %>
               
             </div>

@@ -13,39 +13,14 @@ class User < ActiveRecord::Base
   has_many :bookmarks
 
   def remove_friend(friend)
-    current_user.friends.destroy(friend)
+    friends.destroy(friend)
   end
 
   def full_name
     "#{first_name} #{last_name}"
   end
 
-  #friends
-  # has_many :friendships
-  # has_many :friends, through: :friendships , source: :friend
-
-#for reverse (inverse friendship)
-  # has_many :inverse_friendships , :class_name => "Friendship", :foreign_key => "friend_id"
-  # has_many :inverse_friends , :through => :inverse_friendships , source: :user
-
-
- # validate :check_user
- #  def check_user
- #    if self.friend_id == self.user_id
- #      errors.add(:friend, "can't be yourself")
- #    end
- # end
-
-  #in-terms of friendships
-  # has_many :friendships , dependent: :destroy
-  # has_many :friends, :through => :friendships
-
-  # #in-terms of friend_request
-  # has_many :friend_requests, dependent: :destroy
-  # has_many :pending_friends, through: :friend_requests, source: :friend
-
-  # def remove_friend(friend)
-  # 	current_user.friends.destroy(friend)
-  # end
-
+  def is_friend?(user_id)
+    friends.pluck(:id).include?(user_id)
+  end
 end
