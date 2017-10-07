@@ -10,10 +10,14 @@
           </a>
           <div class="contact-box-footer">
             <div class="m-t-xs btn-group">
-              <% unless current_user.is_friend?(user.id) %>
-                <%= link_to "Add Friend", friend_requests_path(friend_id: user.id), method: :post %>
-              <% else %>
+              <% if current_user.is_friend?(user) %>
                 <%= link_to "Unfriend", friends_destroy_path(id: user.id)%>
+              <% elsif current_user.has_incoming_request_from?(user)%>
+                <%= link_to "Accept", friends_destroy_path(id: user.id)%>
+              <% elsif current_user.has_sent_friend_request?(user)%>
+                <%= link_to "Cancel", friends_destroy_path(id: user.id)%>
+              <% else %>
+                <%= link_to "Add Friend", friend_requests_path(friend_id: user.id), method: :post %>
               <% end %>
             </div>
           </div>

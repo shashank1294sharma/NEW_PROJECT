@@ -20,7 +20,15 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def is_friend?(user_id)
-    friends.pluck(:id).include?(user_id)
+  def is_friend?(user)
+    friends.pluck(:id).include?(user.id)
+  end
+
+  def has_incoming_request_from?(user)
+    FriendRequest.where(friend: self, user_id: user.id).present?
+  end
+
+  def has_sent_friend_request?(user)
+    self.pending_friends.where(id: user.id).present?
   end
 end
