@@ -31,4 +31,8 @@ class User < ActiveRecord::Base
   def has_sent_friend_request?(user)
     self.pending_friends.where(id: user.id).present?
   end
+
+  def friend_request_for(user)
+    self.friend_requests.where(friend_id: user.id).last
+  end
 end

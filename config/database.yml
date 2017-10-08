@@ -11,7 +11,7 @@ default: &default
 
 development:
   <<: *default
-  database: db_dev
+  database: db_dev_3
 
   # database: db/development.sqlite3
 
