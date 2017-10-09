@@ -37,6 +37,8 @@ gem 'omniauth-google-oauth2'
 
 gem 'omniauth-twitter'
 
+gem 'omniauth-facebook'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -13,7 +13,7 @@
               <% if current_user.is_friend?(user) %>
                 <%= link_to "Unfriend", friends_destroy_path(id: user.id)%>
               <% elsif current_user.has_incoming_request_from?(user)%>
-                <%= link_to "Accept", friends_destroy_path(id: user.id)%>
+                <%= link_to "Accept", friend_requests_path(id: user.id)%>
               <% elsif current_user.has_sent_friend_request?(user)%>
                 <% friend_request = current_user.friend_request_for(user) %>
                 <%= link_to "Cancel", friend_request, method: :delete%>
