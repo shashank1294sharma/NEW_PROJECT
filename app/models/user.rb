@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :feeds
   has_many :bookmarks
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  devise :omniauthable, :omniauth_providers => [:facebook , :twitter]
 
   def remove_friend(friend)
     friends.destroy(friend)
@@ -43,13 +43,30 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
-    user.name = auth.info.name   # assuming the user model has a name
+    # user.name = auth.info.name   # assuming the user model has a name
     #user.image = auth.info.image # assuming the user model has an image
     # If you are using confirmable and the provider(s) you use validate emails, 
     # uncomment the line below to skip the confirmation emails.
     # user.skip_confirmation!
   end
-end
+
+#   def self.from_omniauth_twitter(auth)
+
+#     user = where(provider: auth['provider'], uid: auth['uid']).first
+#     if user.present?
+#       user
+#     else
+#       user = User.new
+#       user.name = auth['name']
+#       user.email = auth['email']
+#       user.save
+
+#     end
+    
+#     user
+#   end
+
+ end
 
  def self.new_with_session(params, session)
     super.tap do |user|

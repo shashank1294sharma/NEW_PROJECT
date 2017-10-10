@@ -39,6 +39,9 @@ gem 'omniauth-twitter'
 
 gem 'omniauth-facebook'
 
+gem 'activeadmin'
+
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
