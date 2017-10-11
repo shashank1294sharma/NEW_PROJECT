@@ -50,23 +50,23 @@ class User < ActiveRecord::Base
     # user.skip_confirmation!
   end
 
-#   def self.from_omniauth_twitter(auth)
+ #  def self.from_omniauth_twitter(auth)
 
-#     user = where(provider: auth['provider'], uid: auth['uid']).first
-#     if user.present?
-#       user
-#     else
-#       user = User.new
-#       user.name = auth['name']
-#       user.email = auth['email']
-#       user.save
+ #    user = where(provider: auth['provider'], uid: auth['uid']).first
+ #    if user.present?
+ #      user
+ #    else
+ #      user = User.new
+ #      user.name = auth['name']
+ #      user.email = auth['email']
+ #      user.save
 
-#     end
+ #    end
     
-#     user
-#   end
+ #    user
+ #  end
 
- end
+  end
 
  def self.new_with_session(params, session)
     super.tap do |user|
