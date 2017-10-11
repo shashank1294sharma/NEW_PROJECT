@@ -1,6 +1,6 @@
-Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, ENV['1815767572034819'], ENV['b2b271db6861f8c7271a8ba5bbde9a13']
-end
+# Rails.application.config.middleware.use OmniAuth::Builder do
+#   provider :facebook, "1815767572034819", "b2b271db6861f8c7271a8ba5bbde9a13"
+# end
 
 
 Rails.application.config.middleware.use OmniAuth::Builder do
@@ -13,3 +13,4 @@ end
 #       authorize_url: "https://www.facebook.com/v3.0/dialog/oauth"
 #     }
 # end
+

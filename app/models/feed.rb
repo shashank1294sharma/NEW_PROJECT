@@ -24,4 +24,5 @@ class Feed < ActiveRecord::Base
 	  end
 	end      
 	
+
 end

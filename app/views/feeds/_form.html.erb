@@ -63,25 +63,34 @@
                 <%end%>
                 </div>
                   <% @feeds.each do |feed| %>
+
                   <% user = feed.user %>
                   <div class="box box-widget">
                   <div class="box-header with-border">
+
+                  <div class="user-block">
+                 
+                         <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
+                        <span class="username"><a href="#"> <%= feed.user.first_name if feed.user %></a></span>
+                        <span class="description"> <%= feed.created_at %></span>
+                      </div>
                   <div class="box-tools">
-                    <% if current_user == user %>
                       <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                       <% if current_user == user %>
                       <%=link_to edit_feed_path(feed) do %>
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-minus"></i>
                         <button type="button" class="btn btn-box-tool" data-widget="remove">
                           <%=link_to feed_path(feed), method: :delete , data: {confirm: "Are you sure"} do %>
-                            <i class="fa fa-trash"></i></button>
+                            <i class="fa fa-circle-o"></i></button>
                           <% end %>
                       <% end %>
                        </button>
                     <% end %>
                   </div>
                    <div class="user-block">
-                      <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
-                      <span class="username"><%= user.first_name %></span>     
+                     
+                      <span class="username"><%#= user.first_name %></span>      
+
                    </div>
                 
                     <div class="box-body" style="display: block;">
