@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :feeds, dependent: :destroy
   has_many :bookmarks
 
-  devise :omniauthable, :omniauth_providers => [:facebook , :twitter]
+  devise :omniauthable, :omniauth_providers => [:facebook , :twitter , :google_oauth2]
 
   def remove_friend(friend)
     friends.destroy(friend)
