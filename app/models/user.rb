@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
-  has_many :feeds
+  has_many :feeds, dependent: :destroy
   has_many :bookmarks
 
   devise :omniauthable, :omniauth_providers => [:facebook , :twitter]

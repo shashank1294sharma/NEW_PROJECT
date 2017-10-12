@@ -2,7 +2,7 @@ class Feed < ActiveRecord::Base
 
 	#validates_presence_of :post
   	#validates_presence_of :image
-    has_many :bookmarks
+    has_many :bookmarks 
   	validate :at_least_one
 	
 	belongs_to :user
