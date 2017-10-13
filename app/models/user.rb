@@ -14,6 +14,19 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, :omniauth_providers => [:facebook , :twitter , :google_oauth2]
 
+  # validates :provider, allow_nil: false 
+
+  # validates :email, uniqueness: false, if: Proc.new { |user| user.uid.blank? }
+  # validates :email, presence: true, if: :some_complex_condition
+
+  # validates :provider, acceptance: true, allow_nil: false, on: :create
+
+
+  # validates_presence_of :password_confirmation, :if => :should_confirm?
+
+  def some_complex_condition
+    binding.pry
+  end
   def remove_friend(friend)
     friends.destroy(friend)
   end
@@ -75,5 +88,6 @@ class User < ActiveRecord::Base
       end
     end
   end
+
   
 end
