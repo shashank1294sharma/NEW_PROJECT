@@ -7,9 +7,9 @@ class FriendRequestsController < ApplicationController
     @friend_request = current_user.friend_requests.new(friend: friend)
 
     if @friend_request.save
-      redirect_to root_path
+      redirect_to current_user
     else
-      redirect_to root_path
+      redirect_to current_user
     end
   end
 
@@ -20,7 +20,7 @@ class FriendRequestsController < ApplicationController
 
   def destroy
     @friend_request.destroy
-    redirect_to root_path
+    redirect_to current_user
   end
 
   def update

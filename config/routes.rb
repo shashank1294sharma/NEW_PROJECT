@@ -7,14 +7,14 @@ Rails.application.routes.draw do
 
   
 
-  root 'feeds#new'
+  root 'feeds#index'
 
   resources :users do
     get :find_friends , on: :collection
     get :about_me , on: :collection
   end
 
-  resources :feeds
+  resources :feeds, except: :new
   resources :friendships
   resources :bookmarks
   resources :friend_requests

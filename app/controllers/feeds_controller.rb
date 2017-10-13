@@ -2,11 +2,6 @@ class FeedsController < ApplicationController
   before_action :set_feed , only: [:edit,:update,:show,:destroy]
 
   def index
-    @feeds = current_user.feeds
-    # @posts = Feed.ids(params[:id]).order("created_at DESC")
-  end
-
-  def new
     @users = User.all
     @feed = Feed.new
 
@@ -15,7 +10,20 @@ class FeedsController < ApplicationController
     else
       Feed.for_all.newest_first
     end
+    # @feeds = current_user.feeds
+    # @posts = Feed.ids(params[:id]).order("created_at DESC")
   end
+
+  # def new
+  #   @users = User.all
+  #   @feed = Feed.new
+
+  #   @feeds =  if  current_user.present?
+  #     Feed.public_and_my_feeds(current_user.id).newest_first
+  #   else
+  #     Feed.for_all.newest_first
+  #   end
+  # end
 
   def create
     @feed = current_user.feeds.build(feed_params)
