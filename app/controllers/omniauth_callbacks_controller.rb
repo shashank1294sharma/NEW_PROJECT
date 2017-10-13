@@ -27,6 +27,7 @@ def facebook
       @user.first_name = auth['info']['name']
       @user.provider = auth['provider']
       @user.uid = auth['uid']
+      @user.skip_email_validations = true
       @user.save(validate: false)
     end
       if @user.present?
@@ -60,7 +61,7 @@ def google_oauth2
       @user.first_name = auth['info']['name']
       @user.provider = auth['provider']
       @user.uid = auth['uid']
-      binding.pry
+      @user.skip_email_validations = true
       @user.save(validate: false)
     end
       if @user.present?

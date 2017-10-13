@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  attr_accessor :skip_email_validations
+
   has_many :friend_requests, dependent: :destroy
   has_many :pending_friends, through: :friend_requests, source: :friend
 
@@ -16,17 +18,13 @@ class User < ActiveRecord::Base
 
   # validates :provider, allow_nil: false 
 
-  # validates :email, uniqueness: false, if: Proc.new { |user| user.uid.blank? }
-  # validates :email, presence: true, if: :some_complex_condition
+  validates :email, uniqueness: false, if: :skip_email_validations
 
   # validates :provider, acceptance: true, allow_nil: false, on: :create
 
 
   # validates_presence_of :password_confirmation, :if => :should_confirm?
 
-  def some_complex_condition
-    binding.pry
-  end
   def remove_friend(friend)
     friends.destroy(friend)
   end
