@@ -4,7 +4,7 @@ class FeedsController < ApplicationController
   def index
     @users = User.all
     @feed = Feed.new
-
+    @friend_request = FriendRequest.new
     @feeds =  if  current_user.present?
       Feed.public_and_my_feeds(current_user.id).newest_first
     else

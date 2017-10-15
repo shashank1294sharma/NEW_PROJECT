@@ -12,7 +12,7 @@
                 <img src=<%= asset_path 'guy-5.jpg' %> alt="">
               </a>
               <p>
-                <%=current_user.first_name %>
+                <%=current_user.full_name %>
               </p>
             </div>
             <ul class="nav nav-pills nav-stacked">
@@ -35,55 +35,80 @@
       <div class="row">
         <div class="col-md-12">
           <!-- post state form -->
-          <%= form_for(@feed, :html=> {class: "form-horizontal", role: "form"}) do |f|%>
-            <div class="box profile-info n-border-top">
-              <form>
-                <%=f.text_field :post, class: "form-control input-lg p-text-area", placeholder: "Whats in your mind today?", autofocus: true%>
-              </form>                      
-              <div class="box-footer box-form">
-                <%=f.submit class: "btn btn-azure pull-right"%>
-                  <p >
-                    <%= f.file_field :image %>
-                  </p>
-                  <ul class="feed-post-form-input">
-                    <li>
-                      <%=f.radio_button :status, 'only_me'%>
-                      <%=f.label :status, 'Only me' %>
-                      <%=f.radio_button :status, 'for_all' %>
-                      <%=f.label :status, 'public' %>
-                      <%=f.radio_button :status, 'friends' %>
-                      <%=f.label :status, 'friends' %>
-                    </li>
-                  </ul>
+
+          <div class="row">
+            <div class="ui-widget">
+            <%= simple_form_for @friend_request do |f| %>
+              <div class="row" >
+                <div class="col-md-10">
+                  <%= email_field_tag 'email', nil, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Enter Email", required: true %>   
+                </div>
+                <div class="col-md-2">
+                  <%= f.submit "Submit", class: "btn btn-primary" %>
+                </div>
               </div>
-              <%end%>
-           </div>
-  <% @feeds.each do |feed|%>
-    <% user = feed.user %>
-      <div class="box box-widget">
-        <div class="box-header with-border">
-          <div class="user-block">
-            <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
-            <span class="username"><a href="#"> <%= feed.user.first_name if feed.user %></a></span>
-            <span class="description"> <%= feed.created_at %></span>
-          </div>
-          <div class="box-tools">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-            <% if current_user == user %>
-              <%=link_to edit_feed_path(feed) do %>
-                <i class="fa fa-minus" style="color: black;"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove">
-                <%=link_to feed_path(feed), method: :delete , data: {confirm: "Are you sure"} do %>
-                  <i class="fa fa-times" style="color: black; border-color: #ccc;" ></i></button>
-                <% end %>
-              <% end %>
-              </button>
             <% end %>
+              <%#= email_field :email, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Email", required: true%>
+              <%#= email_field(:user, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Email", required: true) %>
+              <!-- <div class="col-md-10"> -->
+                <%#= email_field_tag 'email', nil, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Enter Email", required: true %>
+              <!-- </div> -->
+              <!-- <div class="col-md-2"> -->
+                <%#=  link_to "Submit", profile_path() %>
+              <!-- </div> -->
+            </div>
           </div>
+          <div class="row">
+            <%= form_for(@feed, :html=> {class: "form-horizontal", role: "form"}) do |f|%>
+              <div class="box profile-info n-border-top">
+                <form>
+                  <%=f.text_field :post, class: "form-control input-lg p-text-area", placeholder: "Whats in your mind today?", autofocus: true%>
+                </form>                      
+                <div class="box-footer box-form">
+                  <%=f.submit class: "btn btn-azure pull-right"%>
+                    <p >
+                      <%= f.file_field :image %>
+                    </p>
+                    <ul class="feed-post-form-input">
+                      <li>
+                        <%=f.radio_button :status, 'only_me'%>
+                        <%=f.label :status, 'Only me' %>
+                        <%=f.radio_button :status, 'for_all' %>
+                        <%=f.label :status, 'public' %>
+                        <%=f.radio_button :status, 'friends' %>
+                        <%=f.label :status, 'friends' %>
+                      </li>
+                    </ul>
+                </div>
+            <%end%>
+          </div>
+        </div>
+        <% @feeds.each do |feed|%>
+          <% user = feed.user %>
+            <div class="box box-widget">
+              <div class="box-header with-border">
+                <div class="user-block">
+                  <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
+                  <span class="username"><a href="#"> <%= feed.user.first_name if feed.user %></a></span>
+                  <span class="description"> <%= feed.created_at %></span>
+                </div>
+                <div class="box-tools">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                  <% if current_user == user %>
+                    <%=link_to edit_feed_path(feed) do %>
+                      <i class="fa fa-minus" style="color: black;"></i></button>
+                      <button type="button" class="btn btn-box-tool" data-widget="remove">
+                      <%=link_to feed_path(feed), method: :delete , data: {confirm: "Are you sure"} do %>
+                        <i class="fa fa-times" style="color: black; border-color: #ccc;" ></i></button>
+                      <% end %>
+                    <% end %>
+                    </button>
+          <% end %>
+        </div>
  
-<div class="user-block">  
-  <span class="username"><%#= user.first_name %></span>      
-</div>
+    <div class="user-block">  
+      <span class="username"><%#= user.first_name %></span>      
+    </div>
 
         <div class="box-body" style="display: block;">
           <p>
@@ -115,10 +140,17 @@
 </div>
 <!-- end  center posts -->
 
-
-
-
 <!-- right posts -->
 <!-- end right posts -->
 </div>
 </div>
+
+<script>
+  $( function() {
+
+    $( "#user_email" ).autocomplete({
+    source: $("#user_email").data('autocomplete-source')
+    });
+
+  } );
+</script>

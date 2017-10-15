@@ -20,4 +20,9 @@ class UsersController < ApplicationController
   def remove_friend
     
   end
+
+  def email_search
+    @users = User.order(:email).where("email like ?", "#{params[:term]}%")
+    render json: @users.map(&:email)
+  end
 end

@@ -49,7 +49,6 @@ class User < ActiveRecord::Base
     self.friend_requests.where(friend_id: user.id).last
   end
 
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     user.email = auth.info.email
@@ -79,7 +78,7 @@ class User < ActiveRecord::Base
 
   end
 
- def self.new_with_session(params, session)
+  def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.email = data["email"] if user.email.blank?
@@ -87,5 +86,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  
 end

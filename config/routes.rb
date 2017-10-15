@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users do
     get :find_friends , on: :collection
     get :about_me , on: :collection
+    get :email_search , on: :collection
   end
 
   resources :feeds, except: :new

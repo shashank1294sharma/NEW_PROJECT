@@ -3,11 +3,17 @@ class FriendRequestsController < ApplicationController
   before_action :set_friend_request, except: [:index, :create]
 
   def create
-    friend = User.find(params[:friend_id])
+    friend = if params.has_key?('email')
+      User.find_by_email(params[:email])
+    else
+      User.find(params[:friend_id])
+    end
+
     @friend_request = current_user.friend_requests.new(friend: friend)
 
-    if @friend_request.save
-      redirect_to current_user
+    @friend_request.save
+    if params.has_key?('email')
+      redirect_to feeds_path
     else
       redirect_to current_user
     end
