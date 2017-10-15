@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def email_search
-    @users = User.order(:email).where("email like ?", "#{params[:term]}%")
+    @users = User.with_search(params[:term], current_user)
     render json: @users.map(&:email)
   end
 end

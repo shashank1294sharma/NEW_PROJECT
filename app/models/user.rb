@@ -86,4 +86,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.with_search(term, user)
+    self.order(:email).where("email like ?", "#{term}%").reject{|u| u.is_friend?(user) || u.has_incoming_request_from?(user) || u.has_sent_friend_request?(user) || u.id == user.id}
+  end
 end
