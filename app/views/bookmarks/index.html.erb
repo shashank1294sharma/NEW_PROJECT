@@ -4,6 +4,7 @@
 
 <div class="row">
 <!-- left links -->
+
 <div class="col-md-3">
   <div class="profile-nav">
     <div class="widget">
@@ -13,7 +14,7 @@
             <img src=<%= asset_path 'guy-5.jpg' %> alt="">
           </a>
           <p>
-            <%=current_user.email %>
+            <%=current_user.full_name %>
           </p>
         </div>
         <ul class="nav nav-pills nav-stacked">
@@ -27,10 +28,7 @@
 
 </div>
 
-
-
 <div class="col-md-6">
-
   <div class="row">
     <div class="col-md-12">
       <div class="row">
@@ -38,13 +36,16 @@
           <div class="box box-widget">
             <div class="box-header with-border">
                <div class="box-tools">
+                <% @bookmarks.each do |bookmark| %>
                 </div>
                <div class="user-block">
                   <img class="img-circle" src=<%= asset_path 'guy-5.jpg' %>  alt="User Image">
+                   <span class="username"><a href="#"> <%= bookmark.user.first_name if bookmark.user %></a></span>
+                  <span class="description"> <%= bookmark.created_at %></span>
                </div><br>
                 <div class="box-body" style="display: block;">
-                  <% @bookmarks.each do |bookmark| %>
-                    <p><h4>--></h4><%= bookmark.feed.try(:post) %></p>
+                  
+                    <p><%= bookmark.feed.try(:post) %></p>
                     <%= image_tag(bookmark.feed.image)%>
                   <% end %>
                 </div>

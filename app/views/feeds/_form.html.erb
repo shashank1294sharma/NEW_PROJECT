@@ -35,27 +35,18 @@
       <div class="row">
         <div class="col-md-12">
           <!-- post state form -->
-
           <div class="row">
             <div class="ui-widget">
-            <%= simple_form_for @friend_request do |f| %>
-              <div class="row" >
-                <div class="col-md-10">
-                  <%= email_field_tag 'email', nil, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Enter Email", required: true %>   
+              <%= simple_form_for @friend_request do |f| %>
+                <div class="row" >
+                  <div class="col-md-10">
+                    <%= email_field_tag 'email', nil, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Enter Email for search user", required: true %>   
+                  </div>
+                  <div class="col-md-2">
+                    <%= f.submit "Submit", class: "btn btn-primary" %>
+                  </div>
                 </div>
-                <div class="col-md-2">
-                  <%= f.submit "Submit", class: "btn btn-primary" %>
-                </div>
-              </div>
-            <% end %>
-              <%#= email_field :email, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Email", required: true%>
-              <%#= email_field(:user, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Email", required: true) %>
-              <!-- <div class="col-md-10"> -->
-                <%#= email_field_tag 'email', nil, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Enter Email", required: true %>
-              <!-- </div> -->
-              <!-- <div class="col-md-2"> -->
-                <%#=  link_to "Submit", profile_path() %>
-              <!-- </div> -->
+              <% end %>
             </div>
           </div>
           <div class="row">
@@ -80,8 +71,8 @@
                       </li>
                     </ul>
                 </div>
-            <%end%>
-          </div>
+              <%end%>
+            </div>
         </div>
         <% @feeds.each do |feed|%>
           <% user = feed.user %>
@@ -102,48 +93,46 @@
                         <i class="fa fa-times" style="color: black; border-color: #ccc;" ></i></button>
                       <% end %>
                     <% end %>
-                    </button>
-          <% end %>
-        </div>
- 
-    <div class="user-block">  
-      <span class="username"><%#= user.first_name %></span>      
-    </div>
-
-        <div class="box-body" style="display: block;">
-          <p>
-            <%= feed.post %>  
-          </p>
-            <%= image_tag(feed.image)%>
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-              <span class="pull-right text-muted">127 likes - 3 comments</span>
-            <%# @bookmark = Bookmark.new %> 
-            <%#= link_to "Bookmarks", @bookmark({feed_id: feed.id}), method: 'post' %>
-              <%if current_user.bookmarks.pluck(:feed_id).include?(feed.id)%>
-                <%= link_to "bookmarke saved"%>
-              <%else%>
-              <%= link_to "Bookmark", {:controller => "bookmarks", :action => "create", :feed_id => feed.id }, :method => :post%>
-            <%end%>
+                  </button>
+                  <% end %>
             </div>
-          </div>
-        </div>
-<% end %>
+ 
+                      <div class="user-block">  
+                        <span class="username"><%#= user.first_name %></span>      
+                      </div>
+
+                      <div class="box-body" style="display: block;">
+                        <p>
+                          <%= feed.post %>  
+                        </p>
+                        <%= image_tag(feed.image)%>
+                          <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                          <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                          <span class="pull-right text-muted">127 likes - 3 comments</span>
+                          <%if current_user.bookmarks.pluck(:feed_id).include?(feed.id)%>
+                            <%= link_to "bookmarke saved"%>
+                          <%else%>
+                            <%= link_to "Bookmark", {:controller => "bookmarks", :action => "create", :feed_id => feed.id }, :method => :post%>
+                          <%end%>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
 <!-- end post state form -->
 
 
+              </div>
+            </div>
+          </div>
+      <!-- end left posts-->
+        </div>
       </div>
+      <!-- end  center posts -->
+
+      <!-- right posts -->
+      <!-- end right posts -->
     </div>
   </div>
-<!-- end left posts-->
-</div>
-</div>
-<!-- end  center posts -->
-
-<!-- right posts -->
-<!-- end right posts -->
-</div>
-</div>
 
 <script>
   $( function() {

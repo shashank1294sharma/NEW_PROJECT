@@ -34,7 +34,7 @@ class FeedsController < ApplicationController
     end
     if @feed.save
       flash[:success] = "Feed was succesfully created"
-      redirect_to new_feed_path
+      redirect_to root_path
     else
       render 'new'
     end
@@ -53,14 +53,15 @@ class FeedsController < ApplicationController
     if @feed.present?
       @feed.destroy 
     end
-    redirect_to new_feed_path
+    redirect_to root_path
     end
 
   def show
-    redirect_to new_feed_path
+    redirect_to root_path
   end
 
   def edit
+     @friend_request = FriendRequest.new
     @users = User.all
     @feeds =  if  current_user.present?
       Feed.public_and_my_feeds(current_user.id).newest_first
