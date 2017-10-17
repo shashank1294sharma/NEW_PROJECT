@@ -18,7 +18,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 #   end
 
 def facebook
- 
+
   # You need to implement the method below in your model
     auth = env["omniauth.auth"]
     @user =  User.where(provider: auth['provider'], uid: auth['uid']).first

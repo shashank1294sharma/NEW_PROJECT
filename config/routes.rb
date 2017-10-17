@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'friends/destroy'
   get 'friends/index'
 
+  get 'facebooks/facebook_profile'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

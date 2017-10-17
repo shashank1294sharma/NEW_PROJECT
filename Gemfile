@@ -41,6 +41,8 @@ gem 'omniauth-facebook'
 
 gem 'activeadmin'
 
+gem "koala"
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
