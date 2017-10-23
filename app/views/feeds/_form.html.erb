@@ -42,13 +42,14 @@
                   <div class="col-md-10">
                     <%= email_field_tag 'email', nil, data: {autocomplete_source: email_search_users_path}, id: 'user_email', class: "form-control", placeholder: "Enter Email for search user", required: true %>   
                   </div>
-                  <div class="col-md-2">
-                    <%= f.submit "Submit", class: "btn btn-primary" %>
+                  <div class="col-md-2  ">
+                    <%= f.submit "Submit", class: "btn btn-azure pull-right" %>
                   </div>
                 </div>
               <% end %>
             </div>
           </div>
+          <br>
           <div class="row">
             <%= form_for(@feed, :html=> {class: "form-horizontal", role: "form"}) do |f|%>
               <div class="box profile-info n-border-top">
@@ -106,13 +107,15 @@
                           <%= feed.post %>  
                         </p>
                         <%= image_tag(feed.image)%>
-                          <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                          <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                          <span class="pull-right text-muted">127 likes - 3 comments</span>
+                          <!-- <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button> -->
+                         
+                          <!-- <span class="pull-right text-muted">127 likes - 3 comments</span> -->
                           <%if current_user.bookmarks.pluck(:feed_id).include?(feed.id)%>
-                            <%= link_to "bookmarke saved"%>
+                            <%#= link_to'<i class="icon-ok icon-white"></i> Bookmark Saved'.html_safe%>
+                            <%= link_to '<button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Bookmark Saved</button>'.html_safe%>
+                            <%#= button_to "Bookmark saved",{class: 'btn btn-default btn-xs'}%>
                           <%else%>
-                            <%= link_to "Bookmark", {:controller => "bookmarks", :action => "create", :feed_id => feed.id }, :method => :post%>
+                            <%= link_to '<button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>Bookmark </button>'.html_safe, {:controller => "bookmarks", :action => "create", :feed_id => feed.id }, :method => :post%>
                           <%end%>
                       </div>
                     </div>

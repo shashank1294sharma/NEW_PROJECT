@@ -1,5 +1,5 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  
+  require 'koala'
 #   def facebook
 #     binding.pry
 # # You need to implement the method below in your model (e.g. app/models/user.rb)
@@ -27,6 +27,7 @@ def facebook
       @user.first_name = auth['info']['name']
       @user.provider = auth['provider']
       @user.uid = auth['uid']
+      @user.token = auth['credentials']['token']
       @user.skip_email_validations = true
       @user.save(validate: false)
     end
@@ -38,6 +39,9 @@ def facebook
         redirect_to new_user_registration_url
       end
     end
+
+   
+
 
 
 def google_oauth2
@@ -117,6 +121,9 @@ def google_oauth2
         redirect_to new_user_registration_url
       end
     end
+
+    
+
   end
 # def twitter
 #   # You need to implement the method below in your model

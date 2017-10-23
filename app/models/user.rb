@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :friends, through: :friendships
 
   has_many :feeds, dependent: :destroy
-  has_many :bookmarks
+  has_many :bookmarks , dependent: :destroy
 
   devise :omniauthable, :omniauth_providers => [:facebook , :twitter , :google_oauth2]
 
@@ -88,5 +88,11 @@ class User < ActiveRecord::Base
 
   def self.with_search(term, user)
     self.order(:email).where("email like ?", "#{term}%").reject{|u| u.is_friend?(user) || u.has_incoming_request_from?(user) || u.has_sent_friend_request?(user) || u.id == user.id}
+  end
+
+####################Koala ####################
+  def koala_facebook
+    @graph = Koala::Facebook::API.new(token)
+
   end
 end
