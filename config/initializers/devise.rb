@@ -252,7 +252,12 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   #config.omniauth :twitter,  ENV['REtlHbNKEwLg20RmfZXLUnWOVCmzJIVm6CV0kMxp5tHvZobIPC'],  ENV['YRBuBRVn3j5XWvd0eP2U5YOmt']
-config.omniauth :facebook, "1815767572034819", "b2b271db6861f8c7271a8ba5bbde9a13" 
+# config.omniauth :facebook, "1815767572034819", "b2b271db6861f8c7271a8ba5bbde9a13" 
+
+
+
+
+ config.omniauth :facebook, "1815767572034819", "b2b271db6861f8c7271a8ba5bbde9a13", :iframe => true, scope: 'email, user_friends, public_profile'
 
 #config.omniauth :google_oauth2, '25258943244-sr6avm8a78st0bfv3r6tr6kf0f2ojtl1.apps.googleusercontent.com', 'vpYUUtcOM6jUFOKXG6bW0EAU', {}
 

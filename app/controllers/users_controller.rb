@@ -13,6 +13,11 @@ class UsersController < ApplicationController
     @users = User.all.reject{|u| u.id == current_user.id}
   end
 
+  def all_friends
+    @users = User.all.reject{|u| u.id == current_user.id}
+    @incoming = FriendRequest.where(friend: current_user)
+  end
+
   def add_friend
     
   end

@@ -15,7 +15,8 @@ class FriendRequestsController < ApplicationController
     if params.has_key?('email')
       redirect_to feeds_path
     else
-      redirect_to current_user
+      #redirect_to current_user
+      redirect_to all_friends_users_path
     end
   end
 
@@ -26,12 +27,12 @@ class FriendRequestsController < ApplicationController
 
   def destroy
     @friend_request.destroy
-    redirect_to current_user
+    redirect_to all_friends_users_path
   end
 
   def update
     @friend_request.accept
-    redirect_to root_path
+    redirect_to all_friends_users_path
   end
 
   private

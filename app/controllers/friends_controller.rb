@@ -8,7 +8,7 @@ class FriendsController < ApplicationController
 
   def destroy
     current_user.remove_friend(@friend)
-    redirect_to root_path
+    redirect_to all_friends_users_path
   end
 
   private

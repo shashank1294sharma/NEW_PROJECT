@@ -1,6 +1,17 @@
-<h1>Friends</h1>
+<%= render 'layouts/innerpage'%>
 
-<% @friends.each do |friend|%>
-	<%= friend.full_name %>
-	<br>
-<% end %>
+<div class="friend_request_section" style="margin-top: 100px">
+  <center><h3>Friends</h3></center>
+    <div role="tabpanel" class="tab-pane active" id="messages">
+      <div class="row">
+        <%@friends.each do |friend|%>
+          <div class="col-md-2">
+            <div class="contact-box center-version">
+              <h3 class="m-b-xs"><center><%= friend.full_name %></center></h3>
+              <br>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
+</div>

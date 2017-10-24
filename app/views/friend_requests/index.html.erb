@@ -1,18 +1,43 @@
 <%= render 'layouts/innerpage'%>
 
 <div class="friend_request_section" style="margin-top: 100px">
-  <h2>Incoming</h2>
-  <%@incoming.each do |friend_request|%>
-    <%= friend_request.sender_name%>
-    <%= link_to "Accept", friend_request, method: :patch %>
-    <%= link_to "Reject", friend_request, method: :delete %>
-    <br>
-  <%end%>
+  <center><h3>Friend Request</h3></center>
+    <div role="tabpanel" class="tab-pane active" id="messages">
+      <div class="row">
+        <%@incoming.each do |friend_request|%>
+          <div class="col-md-3">
+            <div class="contact-box center-version">
+              <h3 class="m-b-xs"><center> <%= friend_request.sender_name%></center></h3>
+              <div class="contact-box-footer">
+                <div class="m-t-xs btn-group">
+                  <%= link_to "Accept", friend_request, method: :patch %>
+                  <%= link_to "Reject", friend_request, method: :delete %>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
 
-  <h2>Outgoing</h2>
-  <%@outgoing.each do |friend_request|%>
-    <%= friend_request.receiver_name%>
-    <%= link_to "Cancel", friend_request, method: :delete %>
-    <br>
-  <%end%>
+
+  <center><h3>Friend Request Sent</h3></center>
+    <div role="tabpanel" class="tab-pane active" id="messages">
+      <div class="row">
+        <%@outgoing.each do |friend_request|%>
+          <div class="col-md-3">
+            <div class="contact-box center-version">
+              <h3 class="m-b-xs"><center><%= friend_request.receiver_name%></center></h3>
+              <div class="contact-box-footer">
+                <div class="m-t-xs btn-group">
+                  <%= link_to "Cancel", friend_request, method: :delete %>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    </div>
 </div>

@@ -1,0 +1,35 @@
+<!-- friends -->
+<%= render 'layouts/innerpage'%>
+
+  <div class="row" style="margin-top: 100px">  
+    <% @users.each do |user| %>
+      <div class="col-md-3">
+        <div class="contact-box center-version">
+          <a href="#">
+            <h3 class="m-b-xs"><strong><%= user.full_name %></strong></h3>
+            <div class="font-bold">Graphics designer</div>
+          </a>
+          <div class="contact-box-footer">
+            <div class="m-t-xs btn-group">
+              <% if current_user.is_friend?(user) %>
+                <%= link_to "Unfriend", friends_destroy_path(id: user.id)%>
+              <% elsif current_user.has_incoming_request_from?(user)%>
+                <%  friend_request = FriendRequest.where(friend: current_user, user_id: user.id).last %>
+                <%= link_to "Accept", friend_request, method: :patch %>
+              <% elsif current_user.has_sent_friend_request?(user)%>
+                <% friend_request = current_user.friend_request_for(user) %>
+                <%= link_to "Cancel", friend_request, method: :delete%>
+              <% else %>
+                <%= link_to "Add Friend", friend_requests_path(friend_id: user.id), method: :post %>
+              <% end %>
+               <%@incoming.each do |friend_request|%>
+               <%= link_to "Reject", friend_request, method: :delete %>
+               <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<!-- end friends -->
